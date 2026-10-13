@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Analyze your resume — ATS ResumeAnalyser{% endblock %}
+{% block content %}
+<div class="page-shell">
+  <section class="hero-panel">
+    <div class="hero-content">
+      <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Your next opportunity starts here</div>
+      <h1 class="page-title">Make your resume work<br class="d-none d-md-block"> harder for you.</h1>
+      <p class="lead mb-4">See how your resume lines up with a job description. Find recognized skills, spot gaps, and get a clearer starting point before you apply.</p>
+      <div class="d-flex flex-wrap gap-2"><a href="#analyze-form" class="btn btn-primary btn-lg">Analyze my resume <i class="fa-solid fa-arrow-down ms-2"></i></a><a href="{% url 'dashboard' %}" class="btn btn-light btn-lg">View dashboard</a></div>
+    </div>
+  </section>
+  <div class="row g-4 align-items-start">
+    <div class="col-lg-5">
+      <div class="eyebrow">Simple, useful insights</div>
+      <h2 class="page-title" style="font-size:2rem">A clearer picture of your resume.</h2>
+      <p class="mb-4">Use the report to understand what your resume currently communicates—not as a guarantee of how a real employer's ATS will rank you.</p>
+      <div class="feature-row"><div class="feature-icon"><i class="fa-solid fa-chart-simple"></i></div><div><strong>Resume score</strong><span>A quick rule-based overview of selected resume content.</span></div></div>
+      <div class="feature-row"><div class="feature-icon"><i class="fa-solid fa-bullseye"></i></div><div><strong>Job skill matching</strong><span>Compare recognized resume skills with the skills in a job description.</span></div></div>
+      <div class="feature-row"><div class="feature-icon"><i class="fa-solid fa-list-check"></i></div><div><strong>Actionable next steps</strong><span>Review matched skills and skills that weren't detected.</span></div></div>
+      <div class="mt-4 small text-muted"><i class="fa-solid fa-shield-halved me-2"></i>Your reports are associated with your account.</div>
+    </div>
+    <div class="col-lg-7" id="analyze-form">
+      <div class="app-card">
+        <div class="panel-heading"><div><div class="eyebrow mb-2">Start a new analysis</div><h2>Upload your resume</h2><p>PDF format works best for text extraction.</p></div><div class="stat-icon"><i class="fa-solid fa-file-arrow-up"></i></div></div>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'resume-upload' %}">
+          {% csrf_token %}
+          <div class="mb-4"><label class="form-label" for="resumeFile">Resume PDF</label><div class="upload-drop"><div class="upload-symbol"><i class="fa-solid fa-cloud-arrow-up"></i></div><label class="form-label d-block mb-1" for="resumeFile">Choose a PDF from your device</label><p class="small mb-3">Upload a text-based PDF resume</p><input id="resumeFile" type="file" class="form-control" name="file" accept="application/pdf,.pdf" required><div class="form-text mt-2">Please use a PDF file. Scanned/image-only PDFs may not extract correctly.</div></div></div>
+          <div class="mb-4"><label class="form-label" for="jobDescription">Job description</label><textarea id="jobDescription" class="form-control" rows="6" name="job_description" placeholder="Paste the job description here… Include the responsibilities and skills listed by the employer." required></textarea><div class="form-text mt-2">The skill comparison only checks skills included in the app's current skill list.</div></div>
+          <button type="submit" class="btn btn-primary btn-lg w-100"><i class="fa-solid fa-wand-magic-sparkles me-2"></i>Analyze resume</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
