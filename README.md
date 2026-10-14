@@ -1,77 +1,120 @@
-# ATS ResumeAnalyser — ATS Resume Analyzer
+# ATS Resume Analyser
 
-A Django-based resume analysis project with a refreshed, responsive UI. Users can register, sign in, upload a PDF resume, compare recognized skills with a job description, view rule-based scores, and revisit saved reports.
+A Django-based web application that analyses PDF resumes, identifies technical skills, calculates a rule-based resume score, and compares resume skills against a job description.
 
-## Technology stack
+Built with Python, Django, Django REST Framework, SQLite, HTML, CSS, and Bootstrap.
+
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
+![Django](https://img.shields.io/badge/Django-4.2-green)
+![Django REST Framework](https://img.shields.io/badge/Django%20REST%20Framework-DRF-red)
+![Database](https://img.shields.io/badge/Database-SQLite-blue)
+![UI](https://img.shields.io/badge/UI-Responsive-purple)
+![Project](https://img.shields.io/badge/Project-Educational-lightgrey)
+
+---
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Application Workflow](#application-workflow)
+- [ATS Scoring Approach](#ats-scoring-approach)
+- [User Interface](#user-interface)
+- [Limitations](#limitations)
+- [Future Improvements](#future-improvements)
+- [Author](#author)
+
+---
+
+## Overview
+
+ATS Resume Analyser is a web application designed to help job seekers evaluate their resumes and identify relevant skills for a target job.
+
+Users can create an account, upload a resume in PDF format, extract resume text, identify recognized technical skills, and receive a rule-based score. The application also compares recognized resume skills against skills identified in a job description.
+
+The application provides a dashboard where users can access their saved resume analyses and review detailed results.
+
+This project demonstrates full-stack web development, file handling, PDF text extraction, authentication, database integration, and rule-based text analysis using Django.
+
+## Features
+
+- **User Authentication:** Register and log in to access the application.
+- **PDF Resume Upload:** Upload resumes in PDF format.
+- **Text Extraction:** Extract text from supported PDF documents.
+- **Skill Detection:** Identify recognized technical skills using a predefined skill list and regular expressions.
+- **Rule-Based Resume Scoring:** Calculate a score using predefined resume criteria.
+- **Job Description Matching:** Compare recognized resume skills with skills found in a job description.
+- **Matched Skills:** Display skills detected in both the resume and job description.
+- **Missing Skills:** Highlight job-description skills not detected in the resume.
+- **Resume Section Checks:** Check for selected resume sections and keywords.
+- **Personal Dashboard:** View saved resume analyses.
+- **Resume Details:** Review individual analysis results.
+- **PDF Report Download:** Download analysis reports where supported by the application.
+- **Responsive Interface:** Use the application on desktop and mobile-sized screens.
+
+## Technology Stack
+
+### Backend
 
 - Python
-- Django 4.2
+- Django
 - Django REST Framework
+
+### Frontend
+
+- HTML5
+- CSS3
+- Bootstrap 5
+
+### Database
+
 - SQLite
-- HTML, CSS, Bootstrap 5
-- PyPDF for text extraction
-- ReportLab for downloadable PDF reports
 
-## Run locally
+### PDF Processing
 
-1. Install Python 3.9+.
-2. From the project folder, create and activate a virtual environment:
+- PyPDF
+- ReportLab for PDF report generation
 
-   ```bash
-   python -m venv venv
-   # macOS / Linux
-   source venv/bin/activate
-   # Windows PowerShell: .\venv\Scripts\Activate.ps1
-   ```
+### Development Tools
 
-3. Install dependencies:
+- Git
+- GitHub
+- Visual Studio Code
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
-4. Create the local database tables:
+## Project Structure
 
-   ```bash
-   python manage.py migrate
-   ```
-
-5. Start Django:
-
-   ```bash
-   python manage.py runserver
-   ```
-
-6. Open http://127.0.0.1:8000/ in your browser, create an account, and sign in.
-
-## Main features
-
-- User registration and login
-- Resume PDF upload
-- PDF text extraction
-- Predefined-list skill detection using regular expressions
-- Rule-based resume score
-- Resume/job-description recognized-skill match score
-- Matched and not-detected skill lists
-- Resume section checks
-- Personal dashboard and saved resume reports
-- PDF report download
-- Responsive layout for desktop and mobile
-
-## UI files
-
-- `resumes/templates/base.html` — shared navigation and page layout
-- `resumes/templates/upload.html` — resume upload and job description form
-- `resumes/templates/dashboard.html` — dashboard and recent reports
-- `resumes/templates/my_resumes.html` — saved resume cards
-- `resumes/templates/results.html` — analysis results
-- `resumes/templates/resume_detail.html` — saved report detail
-- `resumes/templates/login.html` and `register.html` — authentication pages
-- `resumes/static/resumes/css/app.css` — shared visual design and responsive styles
-
-## Important notes
-
-- Scores are generated by simple rules and keyword matching. They are not an official ATS score and do not predict an employer's hiring decision.
-- Skill detection only recognizes terms included in the project's predefined skill list.
-- Text extraction works best with text-based PDFs. Scanned PDFs may need OCR support.
-- Before production deployment, configure a secure secret key, set `DEBUG = False`, configure `ALLOWED_HOSTS`, and review authentication and file-upload security.
+```text
+ats-resume-analyser/
+├── accounts/
+├── analysis/
+├── authentication/
+├── backend/
+├── resumes/
+│   ├── migrations/
+│   ├── static/
+│   │   └── resumes/
+│   │       └── css/
+│   │           └── app.css
+│   ├── templates/
+│   │   ├── base.html
+│   │   ├── dashboard.html
+│   │   ├── login.html
+│   │   ├── my_resumes.html
+│   │   ├── register.html
+│   │   ├── results.html
+│   │   ├── resume_detail.html
+│   │   └── upload.html
+│   ├── models.py
+│   ├── serializers.py
+│   ├── urls.py
+│   ├── utils.py
+│   └── views.py
+├── .gitignore
+├── manage.py
+├── requirements.txt
+└── README.md
